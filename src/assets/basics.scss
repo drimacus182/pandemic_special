@@ -1,0 +1,15 @@
+
+
+
+
+$mq-narrow: 800px;
+
+
+@mixin for-mobile {
+    @media(max-width: $mq-narrow) { @content; }
+}
+
+@mixin for-desktop {
+    @media(min-width: $mq-narrow + 1) { @content; }
+}
+
