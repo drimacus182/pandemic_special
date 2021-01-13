@@ -90,7 +90,7 @@ body, html, p {margin: 0; padding: 0;}
   @include for-desktop {
     display: grid;
     grid-template-columns: var(--main-grid);
-    grid-column-gap: 3em;
+    // grid-column-gap: 3em;
   }
 
 }

@@ -39,7 +39,7 @@ export default {
   @include for-desktop {
     display: grid;
     grid-template-columns: var(--main-grid);
-    grid-column-gap: 3em;
+    // grid-column-gap: 3em;
   }
 
   grid-column: start/end;
