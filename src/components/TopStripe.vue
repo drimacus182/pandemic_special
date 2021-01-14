@@ -69,7 +69,7 @@ export default {
 
     .number{
       font-weight: 800;
-      font-size: 3em;
+      font-size: 2em;
       min-width: max-content;
     }
   }
@@ -83,6 +83,11 @@ export default {
     .corona-logo {
       width: 6em;
     }
+  }
+
+  .message-box {
+    font-size: 0.85em;
+    letter-spacing: -0.05em;
   }
 
 
