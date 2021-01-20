@@ -10,7 +10,10 @@
       </div>
     </section>
 
+    <articles-list />
+
     <!-- {{ page_data }} -->
+
 
   </div>
 </template>
@@ -21,6 +24,8 @@
 import TopStripe from './components/TopStripe'
 import Hot from './components/Hot'
 import Question from './components/Question.vue'
+import ArticlesList from './components/ArticlesList'
+
 
 export default {
   name: 'App',
@@ -28,6 +33,7 @@ export default {
     TopStripe,
     Hot,
     Question,
+    ArticlesList,
   },
 
   data: function(){
