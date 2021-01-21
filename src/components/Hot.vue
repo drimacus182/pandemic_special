@@ -32,7 +32,7 @@ export default {
     grid-column: middle/end;
   }
 
-  min-height: 15em;
+  min-height: 18em;
 
   background-color: var(--col-salmon);
   color: white;

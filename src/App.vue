@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <top-stripe class="h-padding v-padding"/>
+
+    <top-stripe class="h-padding v-padding" :d="top_data"  />
     <hot v-if="page_data.hot" class="h-padding v-padding" :page="page_data.hot"/>
     <section class="questions h-padding v-padding">
-
       <div class="badge">Найчастіші питання:</div>
       <div class="list">
         <question v-for="(q, index) in page_data.questions" :key="index" :q="q" @title_click="question_click(index)"> </question>
       </div>
     </section>
 
+    <charts class="h-padding v-padding" :charts="page_data.charts" v-if="page_data.charts"/>
+
     <articles-list />
-
-    <!-- {{ page_data }} -->
-
 
   </div>
 </template>
@@ -25,6 +24,7 @@ import TopStripe from './components/TopStripe'
 import Hot from './components/Hot'
 import Question from './components/Question.vue'
 import ArticlesList from './components/ArticlesList'
+import Charts from './components/Charts'
 
 
 export default {
@@ -34,6 +34,7 @@ export default {
     Hot,
     Question,
     ArticlesList,
+    Charts,
   },
 
   data: function(){
@@ -55,6 +56,15 @@ export default {
         else q.collapsed = !q.collapsed;
       })
       
+    }
+  },
+
+  computed: {
+    top_data: function() {
+      return {
+        deaths: this.page_data.total_deaths ? this.page_data.total_deaths[0] : null,
+        cases: this.page_data.total_cases ? this.page_data.total_cases[0] : null,
+      }
     }
   }
 }
@@ -126,6 +136,7 @@ body, html, p {margin: 0; padding: 0;}
   @include for-desktop {
     display: grid;
     grid-template-columns: var(--main-grid);
+    grid-auto-rows: min-content;
     // grid-column-gap: 3em;
   }
 
@@ -154,10 +165,13 @@ body, html, p {margin: 0; padding: 0;}
 .badge {
   text-transform: uppercase;
   font-size: 1rem;
+  font-weight: 500;
 }
 
 .questions {
-  grid-row: 2/4;
+  grid-row: 2/5;
+
+  margin-top: 2em;
 
   .badge {
     color: var(--col-salmon);

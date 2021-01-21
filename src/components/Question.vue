@@ -16,9 +16,6 @@ export default {
   },
 
   computed: {
-    // q: function() {
-
-    // }
   }
 }
 </script>
@@ -36,7 +33,7 @@ export default {
     justify-content: space-between;
 
     font-size: 1rem; 
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
     cursor: pointer;
 
@@ -48,6 +45,7 @@ export default {
 
   .heading {
     margin-right: 1em;
+    
   }
   .answer {
     overflow: hidden;
@@ -61,7 +59,7 @@ export default {
     }
 
     .chevron {
-      transform: rotate(-135deg) translate(0, -0.5em);
+      transform: rotate(45deg) translate(-0.5em, 0);
     }
   }
 
@@ -69,9 +67,10 @@ export default {
     padding-left: 1.4em;
     width: 1.5em;
     height: 1.5em;
-
-    transform: rotate(45deg) translate(-0.5em, 0);
-    border: 1px solid var(--col-salmon);
+    
+    transform: rotate(-135deg) translate(0, -0.5em);
+    
+    border: 2px solid var(--col-salmon);
     border-left: none;
     border-top: none;
 

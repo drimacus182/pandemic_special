@@ -114,12 +114,16 @@ section.list-page {
 }
 
 section#articles_list {
-
 }
 </style>
 
 
 <style lang="scss">
+ .rubric-pointer {
+    display: block !important;
+  }
+
+
 // Текстівські стилі 
 .list-page {
   display: grid;
