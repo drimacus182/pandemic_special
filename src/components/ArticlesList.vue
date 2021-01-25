@@ -6,13 +6,15 @@
     </section>
 
     <section id="articles_list">
-        <section v-html="feed_html"> </section>
+        <section v-if="active_feed" v-html="active_feed.feed_html"> </section>
     </section>
 
 </section>
 </template>
 
 <script>
+const BOTTOM_GAP = 500;
+
 export default {
     
     data: function() {
@@ -22,44 +24,64 @@ export default {
                     name: "Що в Україні",
                     url: "/theme/covidpage_ukraine/",
                     active: false,
+                    last_page: 0,
+                    feed_html: "",
+                    pending: false,
                 },
                 {
                     name: "Що кажуть вчені",
                     url: "/theme/covidpage_science/",
                     active: false,
+                    last_page: 0,
+                    feed_html: "",
+                    pending: false,
                 }
             ],
-
             active_feed: null,
-            feed_html: "",
         }
     },
 
     mounted() {
         this.active_feed = this.feeds[0];
         this.active_feed.active = true;
+
+        // прелоад. Тут затримка, щоб не було задохуя запитів
+        this.loadHtml(this.feeds[0]);
+        window.setTimeout(() => this.loadHtml(this.feeds[1]), 2000);
+        
+        window.addEventListener('scroll', this.onscroll);
+    },
+
+    destroyed() {
+      window.removeEventListener("scroll", this.onscroll);
     },
 
     methods: {
-        loadHtml: function(url) {
-            let page = 1;
-            let pending = true;
-            return fetch(`${url}?page=${page}`, {
-                headers: { "X-Requested-With": "XMLHttpRequest" }
-            })
+        loadHtml: function(feed) {
+          if (feed.pending) return;
 
-            .then(function(response) {
-                if (!response.ok) {
-                    if (response.status === 404) throw "end of list";
+          feed.pending = true;
+          let page = feed.last_page + 1;
+          let url = feed.url;
+          
+          return fetch(`${url}?page=${page}`, {
+              headers: { "X-Requested-With": "XMLHttpRequest" }
+          })
 
-                    pending = false;
-                    throw "error while fetching";
+          .then(function(response) {
+              if (!response.ok) {
+                  if (response.status === 404) throw "end of list";
 
-                } else return response;
-            })
+                  feed.pending = false;
+                  throw "error while fetching";
 
-            .then(response => response.text())
-            .then(html => (this.feed_html = html))
+              } else return response;
+          })
+
+          .then(response => response.text())
+          .then(html => (feed.feed_html += html))
+          .then(() => feed.last_page++)
+          .then(() => feed.pending = false)
         },
 
 
@@ -67,17 +89,21 @@ export default {
             this.feeds.forEach(ff => ff.active = false)
             f.active = true;
             this.active_feed = f;
+        },
+
+        onscroll: function(e) {
+          if ((window.innerHeight + window.scrollY + BOTTOM_GAP) >= document.body.offsetHeight) {
+            this.loadHtml(this.active_feed);
+          }
         }
     },
 
     watch: {
         active_feed: function(val) {
-            this.loadHtml(this.active_feed.url)
+
         }
     }
 }
-
-
 
 </script>
 

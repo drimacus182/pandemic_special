@@ -2,9 +2,10 @@
 <section class="charts">
   <div class="badge">Графіки:</div>
 
-  <a :href="active_chart.caption" class="chart-container" v-if="active_chart">
+  <a :href="active_chart.caption" class="chart-container" v-if="active_chart" target="_blank">
     <img :src="`https://texty.org.ua${active_chart.image}`" :alt="active_chart.caption">
   </a>
+  <p class="caption">Клікніть на графіку, щоб дізнатись більше</p>
   <div class="buttons">
     
     <div class="chevron-container" @click="slidePrev">
@@ -56,6 +57,12 @@ export default {
 <style lang="scss" scoped>
 .charts {
   position: relative;
+
+  .caption {
+    text-align: center;
+    font-size: 0.8em;
+    color: #333;;
+  }
 
   .badge {
     color: var(--col-salmon);
