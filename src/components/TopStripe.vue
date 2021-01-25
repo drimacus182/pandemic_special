@@ -2,7 +2,7 @@
   <section class="top-stripe">
     <div class="corona-with-msg">
       <img class="corona-logo" src="../assets/corona.svg" />
-      <p class="message-box"> Все, що варто знати про COVID-19: відповіді на найважливіші запитання; результати наукових досліджень, перебіг епідемії в Україні</p>
+      <p class="message-box" v-html="d.description"></p>
     </div>
 
     <div class="numbers">

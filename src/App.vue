@@ -6,7 +6,9 @@
     <section class="questions h-padding v-padding">
       <div class="badge">Найчастіші питання:</div>
       <div class="list">
-        <question v-for="(q, index) in page_data.questions" :key="index" :q="q" @title_click="question_click(index)"> </question>
+          <perfect-scrollbar>
+            <question v-for="(q, index) in page_data.questions" :key="index" :q="q" @title_click="question_click(index)"> </question>
+          </perfect-scrollbar>
       </div>
     </section>
 
@@ -20,6 +22,9 @@
 
 
 <script>
+import { PerfectScrollbar } from 'vue2-perfect-scrollbar'
+import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+
 import TopStripe from './components/TopStripe'
 import Hot from './components/Hot'
 import Question from './components/Question.vue'
@@ -35,6 +40,7 @@ export default {
     Question,
     ArticlesList,
     Charts,
+    PerfectScrollbar,
   },
 
   data: function(){
@@ -64,6 +70,7 @@ export default {
       return {
         deaths: this.page_data.total_deaths ? this.page_data.total_deaths[0] : null,
         cases: this.page_data.total_cases ? this.page_data.total_cases[0] : null,
+        description: this.page_data.description ? this.page_data.description[0] : null,
       }
     }
   }
@@ -178,4 +185,20 @@ body, html, p {margin: 0; padding: 0;}
   }
 }
 
+
+.ps {
+  max-height: calc(100vh - 14em);
+
+  @include for-mobile {
+    max-height: unset;
+  }
+}
+
+</style>
+
+<style lang="scss">
+// allways visible
+  .ps__rail-y {
+    opacity: 0.6 !important;
+  }
 </style>

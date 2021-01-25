@@ -26,6 +26,7 @@ export default {
 .question {
   padding: 0;
   border-bottom: 1px solid black;
+  margin-right: 0.7em;
 
   .title {
     padding: 1em 0;
