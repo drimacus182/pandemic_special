@@ -164,7 +164,7 @@ body, html, p {margin: 0; padding: 0;}
 }
 
 .vr {
-  width: 1px;
+  width: 2px;
   height: 100%;
   background: white;
 }
@@ -186,17 +186,28 @@ body, html, p {margin: 0; padding: 0;}
 }
 
 
-.ps {
-  max-height: calc(100vh - 14em);
 
-  @include for-mobile {
-    max-height: unset;
+
+@include for-desktop {
+  .ps {
+    max-height: 100%;
+    position: absolute;
   }
+
+
+  .list {
+    height: 100%;
+    position: relative;
+  }
+
 }
 
 </style>
 
 <style lang="scss">
+
+
+
 // allways visible
   .ps__rail-y {
     opacity: 0.6 !important;

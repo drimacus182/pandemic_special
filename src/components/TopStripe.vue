@@ -61,6 +61,8 @@ export default {
   
     @media screen and (max-width: 800px) {
       gap: 3em;
+      width: 100%;
+      justify-content: space-between;
     }
 
   }
